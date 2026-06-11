@@ -111,11 +111,9 @@ def main():
     pygame.display.set_caption("Rainy Day")
     # Done 2: Make a Clock
     clock = pygame.time.Clock()
-    # Done 7: As a temporary test, make a new Raindrop called test_drop at x=320 y=10
-    test_drop = Raindrop(screen, 310, 10)
-    # Done 15: Make a Hero, named mike, with appropriate images, starting at position x=200 y=400.
-    # Done 15: Make a Hero, named alyssa, with appropriate images, starting at position x=700 y=400.
+
     # TODO 23: Make a Cloud, named cloud, with appropriate images, starting at position x=300 y=50.
+    
     mike = Hero(screen, 200, 400, "Mike_umbrella.png", "Mike.png")
     alyssa = Hero(screen, 700, 400, "Alyssa_umbrella.png", "Alyssa.png")
     # Done 3: Enter the game loop, with a clock tick of 60 (or so) at each iteration.
@@ -138,31 +136,6 @@ def main():
         #          If you want something to continually happen while holding the key, put it after the events loop.
 
         # Done 5: Inside the game loop, draw the screen (fill with white)
-
-        # --- begin area of test_drop code that will be removed later
-        # Done 12: As a temporary test, move test_drop
-        # TODO 14: As a temporary test, check if test_drop is off screen, if so reset the y position to 10
-        # Done 10: As a temporary test, draw test_drop
-        test_drop.move()
-        test_drop.draw()
-        if test_drop.off_screen():
-            test_drop.y = 10
-        
-        if mike.hit_by(test_drop):
-            mike.last_hit_time = time.time()
-            test_drop.y = 0
-            test_drop.x = 720
-
-        if alyssa.hit_by(test_drop):
-            alyssa.last_hit_time = time.time()
-            test_drop.y = 0
-            test_drop.x = 310
-
-        # Done 20: As a temporary test, check if test_drop is hitting Mike (or Alyssa), if so set their last_hit_time
-        # TODO 22: Remove the code that reset the y of the test_drop when off_screen()
-        #          Instead reset the test_drop y to 10 when mike is hit, additionally set the x to 750
-        #          Then add similar code to alyssa that sets her last_hit_time and moves the test_drop to 10 320
-        # --- end area of test_drop code that will be removed later
 
         # TODO 26: Draw the Cloud.
 
