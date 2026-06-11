@@ -7,11 +7,11 @@ def distance(point1, point2):
     point2_x = point2[0]
     point1_y = point1[1]
     point2_y = point2[1]
+    return math.sqrt((point2_x - point1_x) ** 2 + (point2_y - point1_y) ** 2)
 
     # TODO 4: Return the actual distance between point 1 and point 2.
     #  Hint: you will need the math library for the sqrt function.
     #       distance = sqrt(   (delta x) ** 2 + (delta y) ** 2  )
-    return 0
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
     font = pygame.font.Font(None, 25)
 
     # TODO 8: Load the "drums.wav" file into the pygame music mixer
-
+    pygame.mixer.music.load("drums.wav")
     instruction_text = 'Click in the circle'
     text_color = (222, 222, 0)
     instructions_image = font.render(instruction_text, True, text_color)
@@ -38,6 +38,20 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                click_position = pygame.mouse.get_pos()
+                distance_from_center = distance(click_position, circle_center)
+                if distance_from_center <= circle_radius:
+                    print("Start the music")
+                    pygame.mixer.music.play(-1)
+                    message_text = 'Bullseye!'
+                else:
+                    print("Stop the music")
+                    pygame.mixer.music.stop()
+                    message_text = 'You missed!'
+
+                
+                    # TODO 9: Start playing the music mixer looping forever if the click is within the circle
 
             # TODO 2: For a MOUSEBUTTONDOWN event get the click position.
                 # TODO 3: Determine the distance between the click position and the circle_center using the distance
@@ -50,9 +64,10 @@ def main():
         screen.fill(pygame.Color("Black"))
 
         # TODO 1: Draw the circle using the screen, circle_color, circle_center, circle_radius, and circle_border_width
-
+        pygame.draw.circle(screen, circle_color, circle_center, circle_radius, circle_border_width)
         # TODO 6: Create a text image (render the text) based on the message_text with the color (122, 237, 201)
-
+        message_image = font.render(message_text, True, (122, 237, 201))
+        screen.blit(message_image, (25,50))
         screen.blit(instructions_image, (25, 25))
         # TODO 7: Draw (blit) the message to the user that says 'Bullseye!' or 'You missed!'
 
