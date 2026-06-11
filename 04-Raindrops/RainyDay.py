@@ -80,19 +80,23 @@ class Hero:
 class Cloud:
     def __init__(self, screen, x, y, image_filename):
         """ Creates a Cloud sprite that will produce Raindrop objects.  The cloud will be moving around. """
-        # TODO 24: Initialize this Cloud, as follows:
+        # Done 24: Initialize this Cloud, as follows:
         #     - Store the screen.
         #     - Set the initial position of this Cloud to x and y.
         #     - Set the image of this Cloud to the given image filename.
         #     - Create a list for Raindrop objects as an empty list called raindrops.
         #   Use instance variables:
         #      screen  x  y  image   raindrops.
-        pass
+        self.screen = screen
+        self.x = x
+        self.y = y
+        self.image = pygame.image.load(image_filename)
+        self.raindrops = []
 
     def draw(self):
         """ Draws this sprite onto the screen. """
-        # TODO 25: Draw (blit) this Cloud's image at its current position.
-        pass
+        # Done 25: Draw (blit) this Cloud's image at its current position.
+        self.screen.blit(self.image, (self.x, self.y))
 
     def rain(self):
         """ Adds a Raindrop to the array of raindrops so that it looks like the Cloud is raining. """
@@ -112,8 +116,10 @@ def main():
     # Done 2: Make a Clock
     clock = pygame.time.Clock()
 
-    # TODO 23: Make a Cloud, named cloud, with appropriate images, starting at position x=300 y=50.
+    # Done 23: Make a Cloud, named cloud, with appropriate images, starting at position x=300 y=50.
     
+    cloud = Cloud(screen, 300, 50, "Cloud.png")
+
     mike = Hero(screen, 200, 400, "Mike_umbrella.png", "Mike.png")
     alyssa = Hero(screen, 700, 400, "Alyssa_umbrella.png", "Alyssa.png")
     # Done 3: Enter the game loop, with a clock tick of 60 (or so) at each iteration.
@@ -137,9 +143,9 @@ def main():
 
         # Done 5: Inside the game loop, draw the screen (fill with white)
 
-        # TODO 26: Draw the Cloud.
-
-        # TODO 29: Remove the temporary testdrop code from this function and refactor it as follows:
+        # Done 26: Draw the Cloud.
+        cloud.draw()
+        # Done 29: Remove the temporary testdrop code from this function and refactor it as follows:
         # TODO: Make the Cloud "rain", then:
         # TODO    For each Raindrop in the Cloud's list of raindrops:
             #       - move the Raindrop.
