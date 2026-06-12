@@ -7,14 +7,14 @@ import time
 # You will implement this module ENTIRELY ON YOUR OWN!
 class Ball:
     def __init__(self, screen: pygame.Surface):
-        self.radius = random.randint(20, 80)
+        self.radius = random.randint(20, 40)
         self.screen = screen
         self.x = random.randint(self.radius, screen.get_width() - self.radius)
         self.y = random.randint(self.radius, screen.get_height() - self.radius)
         
         self.color = (random.randint(0, 255), random.randint(0, 255),random.randint(0, 255))
-        self.speed_x = random.randint(1, 10)
-        self.speed_y = random.randint(1, 10)
+        self.speed_x = random.randint(1, 5)
+        self.speed_y = random.randint(1, 5)
 
     def draw(self):
         pygame.draw.circle (self.screen, self.color, (self.x, self.y), self.radius)
@@ -36,21 +36,17 @@ class Ball:
         return self.x < self.radius
 
 
-# TODO: Create a Ball class.
-# TODO: Possible member variables: screen, color, x, y, radius, speed_x, speed_y
-# TODO: Methods: __init__, draw, move
-
+num_balls = 50
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((600, 600))
+    screen = pygame.display.set_mode((1000, 800))
     pygame.display.set_caption('Bouncing Ball')
     screen.fill(pygame.Color('gray'))
     clock = pygame.time.Clock()
 
-    ball = Ball(screen)
+    balls = [Ball(screen) for _ in range(num_balls)]
 
-    # TODO: Create an instance of the Ball class called ball1
 
     while True:
         for event in pygame.event.get():
@@ -60,25 +56,27 @@ def main():
         clock.tick(60)
         screen.fill(pygame.Color('gray'))
 
-     
-        ball.draw()
-        ball.move()
+        for ball in balls:
+            ball.draw()
+            ball.move()
 
-        if ball.top():
-            ball.speed_y = -ball.speed_y
 
-        if ball.bottom():
-            ball.speed_y = -ball.speed_y
+            if ball.top():
+                ball.speed_y = -ball.speed_y
 
-        if ball.left():
-            ball.speed_x = -ball.speed_x
+            if ball.bottom():
+                ball.speed_y = -ball.speed_y
 
-        if ball.right(): 
-            ball.speed_x = -ball.speed_x
+            if ball.left():
+                ball.speed_x = -ball.speed_x
 
-        
-        # TODO: Move the ball
-        # TODO: Draw the ball
+            if ball.right(): 
+                ball.speed_x = -ball.speed_x
+            
+        #ball.draw()
+        #ball.move()
+
+
 
         pygame.display.update()
 
