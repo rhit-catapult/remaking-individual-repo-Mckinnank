@@ -13,8 +13,8 @@ class Ball:
         self.y = random.randint(self.radius, screen.get_height() - self.radius)
         
         self.color = (random.randint(0, 255), random.randint(0, 255),random.randint(0, 255))
-        self.speed_x = random.randint(1, 30)
-        self.speed_y = random.randint(1, 30)
+        self.speed_x = random.randint(1, 10)
+        self.speed_y = random.randint(1, 10)
 
     def draw(self):
         pygame.draw.circle (self.screen, self.color, (self.x, self.y), self.radius)
@@ -23,11 +23,19 @@ class Ball:
         self.x += self.speed_x
         self.y += self.speed_y
 
-    def wall(self):
-        
-    #def bounce_wall(self):
-        #return self.y < 0
-        #return self.y > self.screen.get_height
+    def bottom(self):
+        return self.y > self.screen.get_height() - self.radius
+    
+    def top(self):
+        return self.y < self.radius
+    
+    def right(self):
+        return self.x > self.screen.get_width() - self.radius
+    
+    def left(self):
+        return self.x < self.radius
+
+
 # TODO: Create a Ball class.
 # TODO: Possible member variables: screen, color, x, y, radius, speed_x, speed_y
 # TODO: Methods: __init__, draw, move
@@ -56,7 +64,17 @@ def main():
         ball.draw()
         ball.move()
 
-        
+        if ball.top():
+            ball.speed_y = -ball.speed_y
+
+        if ball.bottom():
+            ball.speed_y = -ball.speed_y
+
+        if ball.left():
+            ball.speed_x = -ball.speed_x
+
+        if ball.right(): 
+            ball.speed_x = -ball.speed_x
 
         
         # TODO: Move the ball
