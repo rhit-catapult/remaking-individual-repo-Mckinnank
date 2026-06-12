@@ -1,10 +1,33 @@
 import pygame
 import sys
 import random
+import time
 
 
 # You will implement this module ENTIRELY ON YOUR OWN!
+class Ball:
+    def __init__(self, screen: pygame.Surface):
+        self.radius = random.randint(20, 80)
+        self.screen = screen
+        self.x = random.randint(self.radius, screen.get_width() - self.radius)
+        self.y = random.randint(self.radius, screen.get_height() - self.radius)
+        
+        self.color = (random.randint(0, 255), random.randint(0, 255),random.randint(0, 255))
+        self.speed_x = random.randint(1, 30)
+        self.speed_y = random.randint(1, 30)
 
+    def draw(self):
+        pygame.draw.circle (self.screen, self.color, (self.x, self.y), self.radius)
+
+    def move(self):
+        self.x += self.speed_x
+        self.y += self.speed_y
+
+    def wall(self):
+        
+    #def bounce_wall(self):
+        #return self.y < 0
+        #return self.y > self.screen.get_height
 # TODO: Create a Ball class.
 # TODO: Possible member variables: screen, color, x, y, radius, speed_x, speed_y
 # TODO: Methods: __init__, draw, move
@@ -12,10 +35,12 @@ import random
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((300, 300))
+    screen = pygame.display.set_mode((600, 600))
     pygame.display.set_caption('Bouncing Ball')
     screen.fill(pygame.Color('gray'))
     clock = pygame.time.Clock()
+
+    ball = Ball(screen)
 
     # TODO: Create an instance of the Ball class called ball1
 
@@ -27,6 +52,13 @@ def main():
         clock.tick(60)
         screen.fill(pygame.Color('gray'))
 
+     
+        ball.draw()
+        ball.move()
+
+        
+
+        
         # TODO: Move the ball
         # TODO: Draw the ball
 
