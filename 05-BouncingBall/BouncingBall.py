@@ -13,8 +13,8 @@ class Ball:
         self.y = random.randint(self.radius, screen.get_height() - self.radius)
         
         self.color = (random.randint(0, 255), random.randint(0, 255),random.randint(0, 255))
-        self.speed_x = random.randint(1, 5)
-        self.speed_y = random.randint(1, 5)
+        self.speed_x = random.randint (1, 10)
+        self.speed_y = random.randint(1, 10)
 
     def draw(self):
         pygame.draw.circle (self.screen, self.color, (self.x, self.y), self.radius)
@@ -36,7 +36,7 @@ class Ball:
         return self.x < self.radius
 
 
-num_balls = 50
+num_balls = 500
 
 def main():
     pygame.init()
